@@ -49,7 +49,7 @@ class ContactsController extends AbstractController
      *         description="Данные контакта",
      *         required=true,
      *         value = "ssss",
-     *         @SWG\Schema(ref="#/definitions/Contact"),
+     *         @SWG\Schema(ref="#/definitions/Contacts"),
      *     ),
      *     @SWG\Parameter(
      *         name="signature",
