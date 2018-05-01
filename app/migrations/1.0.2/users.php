@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -29,30 +29,7 @@ class UsersMigration_102 extends Migration
                             'size' => 11,
                             'first' => true
                         ]
-                    )
-                ],
-                'indexes' => [
-                    new Index('PRIMARY', ['id'], 'PRIMARY')
-                ],
-                'options' => [
-                    'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '1',
-                    'ENGINE' => 'InnoDB',
-                    'TABLE_COLLATION' => 'utf8_unicode_ci'
-                ],
-            ]
-        );
-    }
-
-    /**
-     * Run the migrations
-     *
-     * @return void
-     */
-    public function up()
-    {
-        $this->morphTable('users', array(
-                'columns' => array(
+                    ),
                     new Column(
                         'login',
                         array(
@@ -86,8 +63,34 @@ class UsersMigration_102 extends Migration
                             'notNull' => true,
                         )
                     ),
-                ),
-            )
+                ],
+                'indexes' => [
+                    new Index('PRIMARY', ['id'], 'PRIMARY')
+                ],
+                'options' => [
+                    'TABLE_TYPE' => 'BASE TABLE',
+                    'AUTO_INCREMENT' => '1',
+                    'ENGINE' => 'InnoDB',
+                    'TABLE_COLLATION' => 'utf8_unicode_ci'
+                ],
+            ]
+        );
+    }
+
+    /**
+     * Run the migrations
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $this->batchInsert('users', [
+                'id',
+                'login',
+                'password',
+                'added',
+                'status',
+            ]
         );
     }
 
@@ -98,7 +101,7 @@ class UsersMigration_102 extends Migration
      */
     public function down()
     {
-
+        $this->batchDelete('users');
     }
 
 }

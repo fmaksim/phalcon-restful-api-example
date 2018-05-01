@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -29,6 +29,22 @@ class ContactsMigration_101 extends Migration
                             'size' => 11,
                             'first' => true
                         ]
+                    ),
+                    new Column(
+                        'flat_id',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 11,
+                            'first' => true
+                        ]
+                    ),
+                    new Column(
+                        'note_text',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 128,
+                            'after' => 'flat_id'
+                        ]
                     )
                 ],
                 'indexes' => [
@@ -51,25 +67,11 @@ class ContactsMigration_101 extends Migration
      */
     public function up()
     {
-        $this->morphTable('contacts', array(
-                'columns' => array(
-                    new Column(
-                        'flat_id',
-                        array(
-                            'type' => Column::TYPE_INTEGER,
-                            'first' => true
-                        )
-                    ),
-                    new Column(
-                        'note_text',
-                        array(
-                            'type' => Column::TYPE_VARCHAR,
-                            'size' => 128,
-                            'after' => 'flat_id'
-                        )
-                    )
-                ),
-            )
+        $this->batchInsert('contacts', [
+                'id',
+                'flat_id',
+                'note_text',
+            ]
         );
     }
 
@@ -80,7 +82,7 @@ class ContactsMigration_101 extends Migration
      */
     public function down()
     {
-
+        $this->batchDelete('contacts');
     }
 
 }

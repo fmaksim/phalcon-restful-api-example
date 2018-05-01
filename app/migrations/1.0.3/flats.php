@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class PhonesMigration_102
+ * Class FlatsMigration_103
  */
-class PhonesMigration_102 extends Migration
+class FlatsMigration_103 extends Migration
 {
     /**
      * Define the table structure
@@ -17,7 +17,7 @@ class PhonesMigration_102 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('phones', [
+        $this->morphTable('flats', [
                 'columns' => [
                     new Column(
                         'id',
@@ -31,10 +31,19 @@ class PhonesMigration_102 extends Migration
                         ]
                     ),
                     new Column(
-                        'contact_id',
+                        'status',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 16,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'is_client',
                         array(
                             'type' => Column::TYPE_INTEGER,
-                            'size' => 10,
+                            'size' => 1,
+                            'default' => 0,
                             'notNull' => true,
                         )
                     ),
@@ -47,18 +56,48 @@ class PhonesMigration_102 extends Migration
                         )
                     ),
                     new Column(
-                        'phone',
+                        'house_id',
                         array(
-                            'type' => Column::TYPE_BIGINTEGER,
-                            'size' => 12,
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 7,
                             'notNull' => true,
                         )
                     ),
                     new Column(
-                        'code',
+                        'flat_number',
                         array(
                             'type' => Column::TYPE_INTEGER,
-                            'size' => 5,
+                            'size' => 7,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'date',
+                        array(
+                            'type' => Column::TYPE_DATE,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'provider',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 32,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'note_text',
+                        array(
+                            'type' => Column::TYPE_TEXT,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'payment_percent',
+                        array(
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 3,
                             'notNull' => true,
                         )
                     ),
@@ -83,12 +122,17 @@ class PhonesMigration_102 extends Migration
      */
     public function up()
     {
-        $this->batchInsert('phones', [
+        $this->batchInsert('flats', [
                 'id',
-                'contact_id',
+                'status',
+                'is_client',
                 'name',
-                'phone',
-                'code',
+                'house_id',
+                'flat_number',
+                'date',
+                'provider',
+                'note_text',
+                'payment_percent',
             ]
         );
     }
@@ -100,6 +144,7 @@ class PhonesMigration_102 extends Migration
      */
     public function down()
     {
-        $this->batchDelete('phones');
+        $this->batchDelete('flats');
     }
+
 }

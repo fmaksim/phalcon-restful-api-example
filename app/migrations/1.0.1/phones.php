@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -29,7 +29,39 @@ class PhonesMigration_101 extends Migration
                             'size' => 11,
                             'first' => true
                         ]
-                    )
+                    ),
+                    new Column(
+                        'contact_id',
+                        array(
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 10,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'name',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 64,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'phone',
+                        array(
+                            'type' => Column::TYPE_BIGINTEGER,
+                            'size' => 12,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'code',
+                        array(
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 5,
+                            'notNull' => true,
+                        )
+                    ),
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY')
@@ -51,7 +83,14 @@ class PhonesMigration_101 extends Migration
      */
     public function up()
     {
-
+        $this->batchInsert('phones', [
+                'id',
+                'contact_id',
+                'name',
+                'phone',
+                'code',
+            ]
+        );
     }
 
     /**
@@ -61,7 +100,6 @@ class PhonesMigration_101 extends Migration
      */
     public function down()
     {
-
+        $this->batchDelete('phones');
     }
-
 }

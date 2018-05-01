@@ -29,6 +29,22 @@ class ContactsMigration_100 extends Migration
                             'size' => 11,
                             'first' => true
                         ]
+                    ),
+                    new Column(
+                        'flat_id',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 11,
+                            'first' => true
+                        ]
+                    ),
+                    new Column(
+                        'note_text',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 128,
+                            'after' => 'flat_id'
+                        ]
                     )
                 ],
                 'indexes' => [
@@ -51,6 +67,12 @@ class ContactsMigration_100 extends Migration
      */
     public function up()
     {
+        $this->batchInsert('contacts', [
+                'id',
+                'flat_id',
+                'note_text',
+            ]
+        );
     }
 
     /**
@@ -60,7 +82,7 @@ class ContactsMigration_100 extends Migration
      */
     public function down()
     {
-
+        $this->batchDelete('contacts');
     }
 
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class PhonesMigration_102
+ * Class UsersMigration_103
  */
-class PhonesMigration_102 extends Migration
+class UsersMigration_103 extends Migration
 {
     /**
      * Define the table structure
@@ -17,7 +17,7 @@ class PhonesMigration_102 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('phones', [
+        $this->morphTable('users', [
                 'columns' => [
                     new Column(
                         'id',
@@ -31,23 +31,23 @@ class PhonesMigration_102 extends Migration
                         ]
                     ),
                     new Column(
-                        'contact_id',
-                        array(
-                            'type' => Column::TYPE_INTEGER,
-                            'size' => 10,
-                            'notNull' => true,
-                        )
-                    ),
-                    new Column(
-                        'name',
+                        'login',
                         array(
                             'type' => Column::TYPE_VARCHAR,
-                            'size' => 64,
+                            'size' => 32,
                             'notNull' => true,
                         )
                     ),
                     new Column(
-                        'phone',
+                        'password',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 256,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'added',
                         array(
                             'type' => Column::TYPE_BIGINTEGER,
                             'size' => 12,
@@ -55,10 +55,11 @@ class PhonesMigration_102 extends Migration
                         )
                     ),
                     new Column(
-                        'code',
+                        'status',
                         array(
                             'type' => Column::TYPE_INTEGER,
-                            'size' => 5,
+                            'size' => 1,
+                            'default' => 0,
                             'notNull' => true,
                         )
                     ),
@@ -83,12 +84,12 @@ class PhonesMigration_102 extends Migration
      */
     public function up()
     {
-        $this->batchInsert('phones', [
+        $this->batchInsert('users', [
                 'id',
-                'contact_id',
-                'name',
-                'phone',
-                'code',
+                'login',
+                'password',
+                'added',
+                'status',
             ]
         );
     }
@@ -100,6 +101,7 @@ class PhonesMigration_102 extends Migration
      */
     public function down()
     {
-        $this->batchDelete('phones');
+        $this->batchDelete('users');
     }
+
 }

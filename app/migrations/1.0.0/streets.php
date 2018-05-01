@@ -29,7 +29,23 @@ class StreetsMigration_100 extends Migration
                             'size' => 11,
                             'first' => true
                         ]
-                    )
+                    ),
+                    new Column(
+                        'street_type',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 7,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'street',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 64,
+                            'notNull' => true,
+                        )
+                    ),
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY')
@@ -51,7 +67,12 @@ class StreetsMigration_100 extends Migration
      */
     public function up()
     {
-
+        $this->batchInsert('streets', [
+                'id',
+                'street_type',
+                'street',
+            ]
+        );
     }
 
     /**
@@ -61,7 +82,7 @@ class StreetsMigration_100 extends Migration
      */
     public function down()
     {
-
+        $this->batchDelete('streets');
     }
 
 }

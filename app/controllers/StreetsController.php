@@ -18,7 +18,7 @@ class StreetsController extends AbstractController
 
     public function __construct()
     {
-        try {
+        /*try {
             $this->usersService->checkSignature();
         } catch (ServiceException $e) {
             switch ($e->getCode()) {
@@ -30,7 +30,7 @@ class StreetsController extends AbstractController
                 default:
                     throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
             }
-        }
+        }*/
     }
 
     /**
@@ -41,20 +41,20 @@ class StreetsController extends AbstractController
     /**
      * @SWG\Get(
      *   path="/street",
-     *   summary="Получить список улиц",
+     *   summary="Get street list",
      *   tags={"street"},
      *     @SWG\Parameter(
      *         name="signature",
      *         in="header",
      *         required=true,
-     *         description="Цифровая подпись",
+     *         description="MAC signature",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *   @SWG\Response(
@@ -70,11 +70,11 @@ class StreetsController extends AbstractController
     public function getStreetListAction()
     {
         try {
-            $streetsList = $this->streetsService->getStreetsList();
+            $streets = $this->streetsService->getStreetsList();
         } catch (ServiceException $e) {
             throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
         }
-        return $streetsList;
+        return $streets;
     }
 
 }

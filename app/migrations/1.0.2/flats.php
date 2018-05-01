@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -29,30 +29,7 @@ class FlatsMigration_102 extends Migration
                             'size' => 11,
                             'first' => true
                         ]
-                    )
-                ],
-                'indexes' => [
-                    new Index('PRIMARY', ['id'], 'PRIMARY')
-                ],
-                'options' => [
-                    'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '1',
-                    'ENGINE' => 'InnoDB',
-                    'TABLE_COLLATION' => 'utf8_unicode_ci'
-                ],
-            ]
-        );
-    }
-
-    /**
-     * Run the migrations
-     *
-     * @return void
-     */
-    public function up()
-    {
-        $this->morphTable('flats', array(
-                'columns' => array(
+                    ),
                     new Column(
                         'status',
                         array(
@@ -124,8 +101,39 @@ class FlatsMigration_102 extends Migration
                             'notNull' => true,
                         )
                     ),
-                ),
-            )
+                ],
+                'indexes' => [
+                    new Index('PRIMARY', ['id'], 'PRIMARY')
+                ],
+                'options' => [
+                    'TABLE_TYPE' => 'BASE TABLE',
+                    'AUTO_INCREMENT' => '1',
+                    'ENGINE' => 'InnoDB',
+                    'TABLE_COLLATION' => 'utf8_unicode_ci'
+                ],
+            ]
+        );
+    }
+
+    /**
+     * Run the migrations
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $this->batchInsert('flats', [
+                'id',
+                'status',
+                'is_client',
+                'name',
+                'house_id',
+                'flat_number',
+                'date',
+                'provider',
+                'note_text',
+                'payment_percent',
+            ]
         );
     }
 
@@ -136,7 +144,7 @@ class FlatsMigration_102 extends Migration
      */
     public function down()
     {
-
+        $this->batchDelete('flats');
     }
 
 }

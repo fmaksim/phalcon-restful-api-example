@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -29,7 +29,40 @@ class UsersMigration_101 extends Migration
                             'size' => 11,
                             'first' => true
                         ]
-                    )
+                    ),
+                    new Column(
+                        'login',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 32,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'password',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 256,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'added',
+                        array(
+                            'type' => Column::TYPE_BIGINTEGER,
+                            'size' => 12,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'status',
+                        array(
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 1,
+                            'default' => 0,
+                            'notNull' => true,
+                        )
+                    ),
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY')
@@ -51,7 +84,14 @@ class UsersMigration_101 extends Migration
      */
     public function up()
     {
-
+        $this->batchInsert('users', [
+                'id',
+                'login',
+                'password',
+                'added',
+                'status',
+            ]
+        );
     }
 
     /**
@@ -61,7 +101,7 @@ class UsersMigration_101 extends Migration
      */
     public function down()
     {
-
+        $this->batchDelete('users');
     }
 
 }

@@ -24,7 +24,7 @@ class StreetsService extends AbstractService
                 [
                     'conditions' => '',
                     'bind' => [],
-                    'columns' => "id, street, streetType",
+                    'columns' => "id, street, street_type",
                 ]
             );
             if (!$streets) {
