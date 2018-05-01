@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class HousesMigration_100
+ * Class HousesMigration_101
  */
-class HousesMigration_100 extends Migration
+class HousesMigration_101 extends Migration
 {
     /**
      * Define the table structure

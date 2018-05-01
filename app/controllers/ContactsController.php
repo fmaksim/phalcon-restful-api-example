@@ -32,37 +32,35 @@ class ContactsController extends AbstractController
         }
     }
 
-    /**
-     * Adding contact
-     */
+
     /**
      * @SWG\Post(
      *     path="/contact",
      *     tags={"contact"},
-     *     summary="Добавление контакта",
+     *     summary="Adding new contact",
      *     description="",
      *     consumes={"application/json", "application/xml"},
      *     produces={"application/xml", "application/json"},
      *     @SWG\Parameter(
      *         name="body",
      *         in="body",
-     *         description="Данные контакта",
+     *         description="Contact data",
      *         required=true,
-     *         value = "ssss",
+     *         value = "",
      *         @SWG\Schema(ref="#/definitions/Contacts"),
      *     ),
      *     @SWG\Parameter(
      *         name="signature",
      *         in="header",
      *         required=true,
-     *         description="Цифровая подпись",
+     *         description="MAC signature",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -73,7 +71,7 @@ class ContactsController extends AbstractController
      */
     public function addContactAction()
     {
-        /** Validation Block **/
+
         $data = (array)$this->request->getJsonRawBody();
         $errors = $this->validate($data);
 
@@ -84,7 +82,6 @@ class ContactsController extends AbstractController
             $exception = new Http400Exception(_('Input parameters validation error'), self::ERROR_INVALID_REQUEST);
             throw $exception->addErrorDetails($errors);
         }
-        /** End Validation Block **/
 
         /** Passing to business logic and preparing the response **/
         try {
@@ -100,45 +97,6 @@ class ContactsController extends AbstractController
         }
         /** End Passing to business logic and preparing the response  **/
     }
-
-    /**
-     * Updating existing contact
-     *
-     * @param string $contactId
-     */
-
-    /**
-     * @param $data
-     * @param $errors
-     * @return array
-     */
-    private function validate($data)
-    {
-        $errors = [];
-
-        if (empty($data['time']))
-            $errors['time'] = 'Time expected';
-
-        if (empty($data['date']))
-            $errors['date'] = 'Date expected';
-
-        if (empty($data['noteText']) && (!is_string($data['noteText'])))
-            $errors['noteText'] = 'noteText expected';
-
-        if (empty($data['status']) && (!is_string($data['status'])))
-            $errors['status'] = 'Status expected';
-
-        if (empty($data['nextDate']) && (!is_string($data['nextDate'])))
-            $errors['nextDate'] = 'NextDate expected';
-
-        return $errors;
-    }
-
-    /**
-     * Delete an existing contact
-     *
-     * @param string $contactId
-     */
 
     /**
      * @SWG\Put(
@@ -264,6 +222,28 @@ class ContactsController extends AbstractController
                     throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
             }
         }
+    }
+
+    private function validate($data): array
+    {
+        $errors = [];
+
+        if (empty($data['time']))
+            $errors['time'] = 'Time expected';
+
+        if (empty($data['date']))
+            $errors['date'] = 'Date expected';
+
+        if (empty($data['noteText']) && (!is_string($data['noteText'])))
+            $errors['noteText'] = 'noteText expected';
+
+        if (empty($data['status']) && (!is_string($data['status'])))
+            $errors['status'] = 'Status expected';
+
+        if (empty($data['nextDate']) && (!is_string($data['nextDate'])))
+            $errors['nextDate'] = 'NextDate expected';
+
+        return $errors;
     }
 
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class HousesMigration_100
+ * Class StreetsMigration_102
  */
-class HousesMigration_100 extends Migration
+class StreetsMigration_102 extends Migration
 {
     /**
      * Define the table structure
@@ -17,7 +17,7 @@ class HousesMigration_100 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('houses', [
+        $this->morphTable('streets', [
                 'columns' => [
                     new Column(
                         'id',
@@ -51,7 +51,27 @@ class HousesMigration_100 extends Migration
      */
     public function up()
     {
-
+        $this->morphTable('streets', array(
+                'columns' => array(
+                    new Column(
+                        'street_type',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 7,
+                            'notNull' => true,
+                        )
+                    ),
+                    new Column(
+                        'street',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 64,
+                            'notNull' => true,
+                        )
+                    ),
+                ),
+            )
+        );
     }
 
     /**

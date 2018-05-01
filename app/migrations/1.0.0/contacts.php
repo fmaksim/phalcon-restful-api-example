@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -51,7 +51,6 @@ class ContactsMigration_100 extends Migration
      */
     public function up()
     {
-
     }
 
     /**
