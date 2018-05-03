@@ -1,4 +1,7 @@
 <?php
+
+use Phalcon\Events\Manager;
+use App\Middleware\SignatureMiddleware;
 /**
  * @SWG\Info(
  *   title="Velcom REST API",
@@ -41,6 +44,18 @@
  *
  */
 
+$eventsManager = new Manager();
+
+/**
+ * Прикрепляем middleware к менеджеру событий и приложению
+ */
+$eventsManager->attach('micro', new SignatureMiddleware());
+$app->before(new SignatureMiddleware());
+
+//$app->before(function () use($app) {
+//$signatureMiddleware = new SignatureMiddleware();
+//$signatureMiddleware->call($app);
+
 $housesCollection = new \Phalcon\Mvc\Micro\Collection();
 $housesCollection->setHandler('\App\Controllers\HousesController', true);
 $housesCollection->setPrefix('/house');
@@ -70,6 +85,7 @@ $contactsCollection->post('', 'addContactAction');
 $contactsCollection->put('/{contactId:[1-9][0-9]*}', 'editContactAction');
 $contactsCollection->delete('/{contactId:[1-9][0-9]*}', 'deleteContactAction');
 $app->mount($contactsCollection);
+//});
 
 $usersCollection = new \Phalcon\Mvc\Micro\Collection();
 $usersCollection->setHandler('\App\Controllers\UsersController', true);
@@ -89,3 +105,5 @@ $app->notFound(
         throw $exception;
     }
 );
+
+$app->setEventsManager($eventsManager);

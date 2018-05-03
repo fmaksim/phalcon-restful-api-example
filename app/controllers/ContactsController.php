@@ -17,7 +17,7 @@ class ContactsController extends AbstractController
 
     public function __construct()
     {
-        try {
+        /*try {
             $this->usersService->checkSignature();
         } catch (ServiceException $e) {
             switch ($e->getCode()) {
@@ -29,7 +29,7 @@ class ContactsController extends AbstractController
                 default:
                     throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
             }
-        }
+        }*/
     }
 
 

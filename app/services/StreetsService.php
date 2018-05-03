@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Components\SignatureHelper;
 use App\Models\Streets;
 
 /**
@@ -11,6 +12,11 @@ use App\Models\Streets;
  */
 class StreetsService extends AbstractService
 {
+
+    public function __construct(SignatureHelper $signatureHelper)
+    {
+        $signatureHelper->call($this->app);
+    }
 
     /**
      * Returns streets list

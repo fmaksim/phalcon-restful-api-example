@@ -39,7 +39,7 @@ class Phones extends \Phalcon\Mvc\Model
      * @var integer
      * @Column(type="integer", length=11, nullable=true)
      */
-    protected $contactId;
+    protected $contact_id;
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -137,7 +137,7 @@ class Phones extends \Phalcon\Mvc\Model
      */
     public function getContactId()
     {
-        return $this->contactId;
+        return $this->contact_id;
     }
 
     /**
@@ -145,7 +145,7 @@ class Phones extends \Phalcon\Mvc\Model
      */
     public function setContactId($contactId)
     {
-        $this->contactId = $contactId;
+        $this->contact_id = $contactId;
         return $this;
     }
 
@@ -155,6 +155,12 @@ class Phones extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->setSchema("");
+        $this->belongsTo(
+            'contact_id',
+            'App\Model\Contacts',
+            'id',
+            array('alias' => 'Contacts')
+        );
     }
 
     /**

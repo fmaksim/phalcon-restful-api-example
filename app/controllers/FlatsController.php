@@ -18,7 +18,7 @@ class FlatsController extends AbstractController
 
     public function __construct()
     {
-        try {
+        /*try {
             $this->usersService->checkSignature();
         } catch (ServiceException $e) {
             switch ($e->getCode()) {
@@ -30,7 +30,7 @@ class FlatsController extends AbstractController
                 default:
                     throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
             }
-        }
+        }*/
     }
 
     /**
@@ -136,7 +136,9 @@ class FlatsController extends AbstractController
     {
         try {
             $flatContacts = $this->contactsService->getFlatContacts($flatId);
-        } catch (ServiceException $e) {
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die();
             throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
         }
 

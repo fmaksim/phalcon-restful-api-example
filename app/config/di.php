@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Db\Adapter\Pdo\Mysql;
+use Phalcon\Events\Manager as EventsManager;
 
 // Initializing a DI Container
 $di = new \Phalcon\DI\FactoryDefault();
@@ -38,6 +39,7 @@ $di->set(
     }
 );
 
+$di->setShared('signatureHelper', '\App\Components\SignatureHelper');
 /** Service to perform operations with the Users */
 $di->setShared('usersService', '\App\Services\UsersService');
 $di->setShared('housesService', '\App\Services\HousesService');

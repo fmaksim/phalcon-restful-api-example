@@ -33,36 +33,27 @@ class ContactsService extends AbstractService
      *
      * @return array
      */
-    public function getFlatContacts($flatId)
+    public function getFlatContacts($flatId): array
     {
         try {
+
             $contacts = Contacts::find(
                 [
-                    'conditions' => 'flatId = :flatId:',
+                    'conditions' => 'flat_id = :flat_id:',
                     'bind' => [
-                        'flatId' => $flatId
+                        'flat_id' => $flatId
                     ],
-                    'columns' => "id, date, noteText, nextDate, time, status, flatId",
                 ]
             );
 
-            if (!$contacts) {
-                return [];
+            $phones = [];
+            foreach ($contacts as $contact) {
+                $phones[$contact->getId()] = $contact->phones;
             }
+
             $contacts = $contacts->toArray();
             foreach ($contacts as &$contact) {
-                $phones = Phones::find(
-                    [
-                        'conditions' => 'contactId = :contactId:',
-                        'bind' => [
-                            'contactId' => $contact["id"]
-                        ],
-                        'columns' => "name, phone, code",
-                    ]
-                );
-                if ($phones)
-                    $contact["phones"] = $phones->toArray();
-
+                $contact["phones"] = $phones[$contact["id"]]->toArray();
             }
 
             return $contacts;

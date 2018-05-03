@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class ContactsMigration_102
+ * Class StreetsMigration_103
  */
-class ContactsMigration_102 extends Migration
+class StreetsMigration_103 extends Migration
 {
     /**
      * Define the table structure
@@ -17,7 +17,7 @@ class ContactsMigration_102 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('contacts', [
+        $this->morphTable('streets', [
                 'columns' => [
                     new Column(
                         'id',
@@ -31,21 +31,21 @@ class ContactsMigration_102 extends Migration
                         ]
                     ),
                     new Column(
-                        'flat_id',
-                        [
-                            'type' => Column::TYPE_INTEGER,
-                            'size' => 11,
-                            'first' => true
-                        ]
+                        'street_type',
+                        array(
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 7,
+                            'notNull' => true,
+                        )
                     ),
                     new Column(
-                        'note_text',
-                        [
+                        'street',
+                        array(
                             'type' => Column::TYPE_VARCHAR,
-                            'size' => 128,
-                            'after' => 'flat_id'
-                        ]
-                    )
+                            'size' => 64,
+                            'notNull' => true,
+                        )
+                    ),
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY')
@@ -67,10 +67,10 @@ class ContactsMigration_102 extends Migration
      */
     public function up()
     {
-        $this->batchInsert('contacts', [
+        $this->batchInsert('streets', [
                 'id',
-                'flat_id',
-                'note_text',
+                'street_type',
+                'street',
             ]
         );
     }
@@ -82,7 +82,6 @@ class ContactsMigration_102 extends Migration
      */
     public function down()
     {
-        $this->batchDelete('contacts');
+        $this->batchDelete('streets');
     }
-
 }

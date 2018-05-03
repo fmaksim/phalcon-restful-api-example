@@ -16,17 +16,13 @@ class Contacts extends \Phalcon\Mvc\Model
      */
     protected $id;
 
-
     /**
-     *
-     * @var string
-     * @Column(type="string", length=64, nullable=true)
+     * @return int
      */
-    /**
-     * @SWG\Property(example="12.05.18")
-     * @var string
-     */
-    protected $time;
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     /**
      *
@@ -48,29 +44,7 @@ class Contacts extends \Phalcon\Mvc\Model
      * @SWG\Property(example="текст примечания")
      * @var string
      */
-    protected $noteText;
-
-    /**
-     *
-     * @var string
-     * @Column(type="string", length=64, nullable=true)
-     */
-    /**
-     * @SWG\Property(example="23.08.18")
-     * @var string
-     */
-    protected $nextDate;
-
-    /**
-     *
-     * @var string
-     * @Column(type="string", length=64, nullable=true)
-     */
-    /**
-     * @SWG\Property(example="статус")
-     * @var string
-     */
-    protected $status;
+    protected $note_text;
 
     /**
      *
@@ -81,7 +55,7 @@ class Contacts extends \Phalcon\Mvc\Model
      * @SWG\Property(example="1")
      * @var integer
      */
-    protected $flatId;
+    protected $flat_id;
 
     /**
      * @SWG\Property(
@@ -120,130 +94,17 @@ class Contacts extends \Phalcon\Mvc\Model
     }
 
     /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTime()
-    {
-        return $this->time;
-    }
-
-    /**
-     * @param string $number
-     */
-    public function setTime($time)
-    {
-        $this->time = $time;
-        return $this;
-    }
-
-    /**
-     * @return date
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param date $date
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNoteText()
-    {
-        return $this->noteText;
-    }
-
-    /**
-     * @param string $noteText
-     */
-    public function setNoteText($noteText)
-    {
-        $this->noteText = $noteText;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNextDate()
-    {
-        return $this->nextDate;
-    }
-
-    /**
-     * @param string $nextDate
-     */
-    public function setNextDate($nextDate)
-    {
-        $this->nextDate = $nextDate;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCost()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFlatId()
-    {
-        return $this->flatId;
-    }
-
-    /**
-     * @param int $flatId
-     */
-    public function setFlatId($flatId)
-    {
-        $this->flatId = $flatId;
-        return $this;
-    }
-
-    /**
      * Initialize method for model.
      */
     public function initialize()
     {
         $this->setSchema("");
+        $this->hasMany(
+            'id',
+            'App\Models\Phones',
+            'contact_id',
+            array('alias' => 'Phones', "reusable" => true)
+        );
     }
 
     /**
