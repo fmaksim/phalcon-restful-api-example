@@ -19,7 +19,7 @@ class UsersController extends AbstractController
      * @SWG\Post(
      *     path="/login",
      *     tags={"user"},
-     *     summary="Метод авторизации",
+     *     summary="Login user",
      *     description="",
      *     consumes={"application/json", "application/xml"},
      *     produces={"application/xml", "application/json"},

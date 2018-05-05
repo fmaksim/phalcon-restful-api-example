@@ -2,36 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Controllers\HttpExceptions\Http400Exception;
-use App\Controllers\HttpExceptions\Http422Exception;
 use App\Controllers\HttpExceptions\Http500Exception;
-use App\Services\AbstractService;
 use App\Services\ServiceException;
-use App\Services\UsersService;
-use App\Services\ContactsService;
 
 /**
  * Operations with Users: CRUD
  */
 class FlatsController extends AbstractController
 {
-
-    public function __construct()
-    {
-        /*try {
-            $this->usersService->checkSignature();
-        } catch (ServiceException $e) {
-            switch ($e->getCode()) {
-                case UsersService::ERROR_USER_NOT_FOUND:
-                    throw new Http400Exception(_('Incorrect login!'), $e->getCode(), $e);
-                case UsersService::ERROR_INVALID_SIGNATURE:
-                    throw new Http400Exception(_('Incorrect signature!'), $e->getCode(), $e);
-                    break;
-                default:
-                    throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
-            }
-        }*/
-    }
 
     /**
      * Returns flat by id
@@ -41,27 +19,27 @@ class FlatsController extends AbstractController
     /**
      * @SWG\Get(
      *     path="/flat/{flatId}",
-     *     summary="Получение информации по конкретной квартире",
+     *     summary="Getting flat info by id",
      *     tags={"flat"},
      *     @SWG\Parameter(
      *         name="flatId",
      *         in="path",
      *         required=true,
-     *         description="ИД квартиры",
+     *         description="Flat id",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="signature",
      *         in="header",
      *         required=true,
-     *         description="Цифровая подпись",
+     *         description="MAC Signature",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -77,13 +55,7 @@ class FlatsController extends AbstractController
     public function getFlatByIdAction($flatId)
     {
         try {
-            $flat = array(
-                "id" => $flatId,
-                "date" => "12.12.2017",
-                "provider" => "Velcom",
-                "payment" => "100",
-                "noteText" => "Примечание"
-            );
+            return $this->flatsService->getFlatById($flatId);
         } catch (ServiceException $e) {
             throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
         }
@@ -99,27 +71,27 @@ class FlatsController extends AbstractController
     /**
      * @SWG\Get(
      *     path="/flat/{flatId}/contacts",
-     *     summary="Получение списка контактов по квартире",
+     *     summary="Returns flat contacts list",
      *     tags={"flat"},
      *     @SWG\Parameter(
      *         name="flatId",
      *         in="path",
      *         required=true,
-     *         description="ИД квартиры",
+     *         description="Flat ID",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="signature",
      *         in="header",
      *         required=true,
-     *         description="Цифровая подпись",
+     *         description="MAC Signature",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -136,9 +108,7 @@ class FlatsController extends AbstractController
     {
         try {
             $flatContacts = $this->contactsService->getFlatContacts($flatId);
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-            die();
+        } catch (ServiceException $e) {
             throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
         }
 

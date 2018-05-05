@@ -16,23 +16,6 @@ use App\Services\StreetsService;
 class StreetsController extends AbstractController
 {
 
-    public function __construct()
-    {
-        /*try {
-            $this->usersService->checkSignature();
-        } catch (ServiceException $e) {
-            switch ($e->getCode()) {
-                case UsersService::ERROR_USER_NOT_FOUND:
-                    throw new Http400Exception(_('Incorrect login!'), $e->getCode(), $e);
-                case UsersService::ERROR_INVALID_SIGNATURE:
-                    throw new Http400Exception(_('Incorrect signature!'), $e->getCode(), $e);
-                    break;
-                default:
-                    throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
-            }
-        }*/
-    }
-
     /**
      * Returns street list
      *

@@ -17,23 +17,6 @@ use App\Services\FlatsService;
 class HousesController extends AbstractController
 {
 
-    public function __construct()
-    {
-        try {
-            $this->usersService->checkSignature();
-        } catch (ServiceException $e) {
-            switch ($e->getCode()) {
-                case UsersService::ERROR_USER_NOT_FOUND:
-                    throw new Http400Exception(_('Incorrect login!'), $e->getCode(), $e);
-                case UsersService::ERROR_INVALID_SIGNATURE:
-                    throw new Http400Exception(_('Incorrect signature!'), $e->getCode(), $e);
-                    break;
-                default:
-                    throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
-            }
-        }
-    }
-
     /**
      * Returns house list
      *
@@ -42,20 +25,20 @@ class HousesController extends AbstractController
     /**
      * @SWG\Get(
      *   path="/house",
-     *   summary="Список доступных адресов (домов)",
+     *   summary="Returns house list",
      *   tags={"house"},
      * @SWG\Parameter(
      *      name="signature",
      *      in="header",
      *      required=true,
-     *      description="Цифровая подпись",
+     *      description="MAC Signature",
      *      type="string"
      *     ),
      * @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *   @SWG\Response(
@@ -82,27 +65,27 @@ class HousesController extends AbstractController
     /**
      * @SWG\Get(
      *     path="/house/street/{streetId}",
-     *     summary="Список домов по конкретной улице",
+     *     summary="House list by street id",
      *     tags={"house"},
      *     @SWG\Parameter(
      *         name="streetId",
      *         in="path",
      *         required=true,
-     *         description="ИД улицы",
+     *         description="Street Id",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="signature",
      *         in="header",
      *         required=true,
-     *         description="Цифровая подпись",
+     *         description="MAC Signature",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -129,27 +112,27 @@ class HousesController extends AbstractController
     /**
      * @SWG\Get(
      *     path="/house/{houseId}",
-     *     summary="Детализация по конкретному адресу (дому)",
+     *     summary="Getting house detail info by id",
      *     tags={"house"},
      *     @SWG\Parameter(
      *         name="houseId",
      *         in="path",
      *         required=true,
-     *         description="ИД дома",
+     *         description="House ID",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="signature",
      *         in="header",
      *         required=true,
-     *         description="Цифровая подпись",
+     *         description="MAC Signature",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -175,27 +158,27 @@ class HousesController extends AbstractController
     /**
      * @SWG\Get(
      *     path="/house/{houseId}/flats",
-     *     summary="Список квартир по конкретному дому",
+     *     summary="Flats list by house ID",
      *     tags={"house"},
      *     @SWG\Parameter(
      *         name="houseId",
      *         in="path",
      *         required=true,
-     *         description="ИД дома",
+     *         description="House id",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="signature",
      *         in="header",
      *         required=true,
-     *         description="Цифровая подпись",
+     *         description="MAC Signature",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *     @SWG\Response(
