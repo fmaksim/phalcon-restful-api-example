@@ -39,7 +39,6 @@ $di->set(
     }
 );
 
-$di->setShared('signatureHelper', '\App\Components\SignatureHelper');
 /** Service to perform operations with the Users */
 $di->setShared('usersService', '\App\Services\UsersService');
 $di->setShared('housesService', '\App\Services\HousesService');
@@ -47,5 +46,6 @@ $di->setShared('streetsService', '\App\Services\StreetsService');
 $di->setShared('flatsService', '\App\Services\FlatsService');
 $di->setShared('contactsService', '\App\Services\ContactsService');
 $di->setShared('phonesService', '\App\Services\PhonesService');
+$di->setShared('contactsFactory', '\App\Factories\ContactsFactory');
 
 return $di;

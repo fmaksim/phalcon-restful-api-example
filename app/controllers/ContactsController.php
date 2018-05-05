@@ -7,31 +7,12 @@ use App\Controllers\HttpExceptions\Http422Exception;
 use App\Controllers\HttpExceptions\Http500Exception;
 use App\Services\AbstractService;
 use App\Services\ServiceException;
-use App\Services\UsersService;
 
 /**
  * Operations with Contacts: CRUD
  */
 class ContactsController extends AbstractController
 {
-
-    public function __construct()
-    {
-        /*try {
-            $this->usersService->checkSignature();
-        } catch (ServiceException $e) {
-            switch ($e->getCode()) {
-                case UsersService::ERROR_USER_NOT_FOUND:
-                    throw new Http400Exception(_('Incorrect login!'), $e->getCode(), $e);
-                case UsersService::ERROR_INVALID_SIGNATURE:
-                    throw new Http400Exception(_('Incorrect signature!'), $e->getCode(), $e);
-                    break;
-                default:
-                    throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
-            }
-        }*/
-    }
-
 
     /**
      * @SWG\Post(
@@ -64,7 +45,7 @@ class ContactsController extends AbstractController
      *         type="string"
      *     ),
      *     @SWG\Response(
-     *         response=405,
+     *         response=400,
      *         description="Invalid input",
      *     )
      * )
@@ -74,9 +55,6 @@ class ContactsController extends AbstractController
 
         $data = (array)$this->request->getJsonRawBody();
         $errors = $this->validate($data);
-
-        if (empty($data['flatId']))
-            $errors['flatId'] = 'FlatId expected';
 
         if ($errors) {
             $exception = new Http400Exception(_('Input parameters validation error'), self::ERROR_INVALID_REQUEST);
@@ -102,7 +80,7 @@ class ContactsController extends AbstractController
      * @SWG\Put(
      *     path="/contact/{contactId}",
      *     tags={"contact"},
-     *     summary="Редактирование контакта",
+     *     summary="Update existing contact",
      *     description="",
      *     consumes={"application/json", "application/xml"},
      *     produces={"application/xml", "application/json"},
@@ -110,7 +88,7 @@ class ContactsController extends AbstractController
      *         name="contactId",
      *         in="path",
      *         required=true,
-     *         description="ИД контакта",
+     *         description="Contact Id",
      *         defaultValue="d34fa50e61b93c4139dad598242ddd42ecbd2fcef3151fe40446e8f5962a03e5admin5"
      *         type="string"
      *     ),
@@ -118,26 +96,26 @@ class ContactsController extends AbstractController
      *         name="signature",
      *         in="header",
      *         required=true,
-     *         description="Цифровая подпись",
+     *         description="MAC signature",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="body",
      *         in="body",
-     *         description="Данные контакта",
+     *         description="Contact data",
      *         required=true,
-     *         value = "ssss",
+     *         value = "",
      *         @SWG\Schema(ref="#/definitions/Contact"),
      *     ),
      *     @SWG\Response(
-     *         response=405,
+     *         response=400,
      *         description="Invalid input",
      *     )
      * )
@@ -175,7 +153,7 @@ class ContactsController extends AbstractController
      * @SWG\Delete(
      *     path="/contact/{contactId}",
      *     tags={"contact"},
-     *     summary="Удаление контакта",
+     *     summary="Delete existing contact",
      *     description="",
      *     consumes={"application/json", "application/xml"},
      *     produces={"application/xml", "application/json"},
@@ -183,21 +161,21 @@ class ContactsController extends AbstractController
      *         name="contactId",
      *         in="path",
      *         required=true,
-     *         description="ИД контакта",
+     *         description="Contact id",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="signature",
      *         in="header",
      *         required=true,
-     *         description="Цифровая подпись",
+     *         description="MAC signature",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="login",
      *         in="header",
      *         required=true,
-     *         description="Логин",
+     *         description="Login",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -228,20 +206,14 @@ class ContactsController extends AbstractController
     {
         $errors = [];
 
-        if (empty($data['time']))
-            $errors['time'] = 'Time expected';
-
         if (empty($data['date']))
             $errors['date'] = 'Date expected';
 
-        if (empty($data['noteText']) && (!is_string($data['noteText'])))
-            $errors['noteText'] = 'noteText expected';
+        if (empty($data['note_text']) && (!is_string($data['note_text'])))
+            $errors['note_text'] = 'noteText expected';
 
-        if (empty($data['status']) && (!is_string($data['status'])))
-            $errors['status'] = 'Status expected';
-
-        if (empty($data['nextDate']) && (!is_string($data['nextDate'])))
-            $errors['nextDate'] = 'NextDate expected';
+        if (empty($data['flat_id']))
+            $errors['flat_id'] = 'FlatId expected';
 
         return $errors;
     }

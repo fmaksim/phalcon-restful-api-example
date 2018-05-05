@@ -47,6 +47,33 @@ class Contacts extends \Phalcon\Mvc\Model
     protected $note_text;
 
     /**
+     * @param string $date
+     */
+    public function setDate(string $date)
+    {
+        $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * @param string $note_text
+     */
+    public function setNoteText(string $note_text)
+    {
+        $this->note_text = $note_text;
+        return $this;
+    }
+
+    /**
+     * @param int $flat_id
+     */
+    public function setFlatId(int $flat_id)
+    {
+        $this->flat_id = $flat_id;
+        return $this;
+    }
+
+    /**
      *
      * @var integer
      * @Column(type="integer", length=11, nullable=true)
@@ -105,6 +132,7 @@ class Contacts extends \Phalcon\Mvc\Model
             'contact_id',
             array('alias' => 'Phones', "reusable" => true)
         );
+
     }
 
     /**

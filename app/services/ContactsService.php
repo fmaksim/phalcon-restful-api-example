@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Contacts;
 use App\Models\Phones;
+use App\Factories\ContactsFactory;
 
 /**
  * Business-logic for contacts
@@ -70,15 +71,7 @@ class ContactsService extends AbstractService
     public function createContact(array $contactData)
     {
         try {
-            $contact = new Contacts();
-            $result = $contact->setDate($contactData['date'])
-                ->setNoteText($contactData['noteText'])
-                ->setNextDate($contactData['nextDate'])
-                ->setTime($contactData['time'])
-                ->setStatus($contactData['status'])
-                ->setFlatId($contactData['flatId'])
-                ->create();
-
+            $contact = $this->contactsFactory->create($contactData);
             $contactId = $contact->getWriteConnection()->lastInsertId();
             if ($contactData['phones']) {
                 foreach ($contactData["phones"] as $phone) {
@@ -92,7 +85,7 @@ class ContactsService extends AbstractService
                 }
             }
 
-            if (!$result)
+            if (!$contact)
                 throw new ServiceException('Unable to create contact', self::ERROR_UNABLE_CREATE_CONTACT);
 
             return ["contactId" => $contactId];
@@ -119,12 +112,8 @@ class ContactsService extends AbstractService
                 ]
             );
 
-            $result = $contact->setDate($contactData['date'])
-                ->setNoteText($contactData['noteText'])
-                ->setNextDate($contactData['nextDate'])
-                ->setTime($contactData['time'])
-                ->setStatus($contactData['status'])
-                ->setFlatId($contactData['flatId'])
+            $result = $this->contactsFactory
+                ->setData($contact, $contactData)
                 ->update();
 
             $phones = new Phones();
