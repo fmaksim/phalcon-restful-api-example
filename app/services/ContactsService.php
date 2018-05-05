@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Contacts;
 use App\Models\Phones;
-use App\Factories\ContactsFactory;
 
 /**
  * Business-logic for contacts
@@ -72,21 +71,15 @@ class ContactsService extends AbstractService
     {
         try {
             $contact = $this->contactsFactory->create($contactData);
-            $contactId = $contact->getWriteConnection()->lastInsertId();
-            if ($contactData['phones']) {
-                foreach ($contactData["phones"] as $phone) {
-                    $phones = new Phones();
-                    $phone = (array)$phone;
-                    $resultPhone = $phones->setName($phone['name'])
-                        ->setPhone($phone['phone'])
-                        ->setCode($phone['code'])
-                        ->setContactId($contactId)
-                        ->create();
-                }
-            }
-
             if (!$contact)
                 throw new ServiceException('Unable to create contact', self::ERROR_UNABLE_CREATE_CONTACT);
+
+            $contactId = $contact->getWriteConnection()->lastInsertId();
+            if ($contactData['phones']) {
+                foreach ($contactData["phones"] as $contactPhone) {
+                    $this->phonesFactory->create($contactPhone, $contactId);
+                }
+            }
 
             return ["contactId" => $contactId];
 
@@ -116,25 +109,11 @@ class ContactsService extends AbstractService
                 ->setData($contact, $contactData)
                 ->update();
 
-            $phones = new Phones();
-            $currentPhones = Phones::find(
-                [
-                    'conditions' => 'contactId = :contactId:',
-                    'bind' => [
-                        'contactId' => $contactData['id']
-                    ]
-                ]
-            );
-            $currentPhones->delete();
+            $contact->getPhones()->delete();
+
             if ($contactData['phones']) {
                 foreach ($contactData["phones"] as $phone) {
-                    $phones = new Phones();
-                    $phone = (array)$phone;
-                    $resultPhone = $phones->setName($phone['name'])
-                        ->setPhone($phone['phone'])
-                        ->setCode($phone['code'])
-                        ->setContactId($contactData['id'])
-                        ->create();
+                    $this->phonesFactory->create($phone, $contactData['id']);
                 }
             }
 

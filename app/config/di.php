@@ -47,5 +47,6 @@ $di->setShared('flatsService', '\App\Services\FlatsService');
 $di->setShared('contactsService', '\App\Services\ContactsService');
 $di->setShared('phonesService', '\App\Services\PhonesService');
 $di->setShared('contactsFactory', '\App\Factories\ContactsFactory');
+$di->setShared('phonesFactory', '\App\Factories\PhonesFactory');
 
 return $di;
