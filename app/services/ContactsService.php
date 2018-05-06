@@ -107,6 +107,9 @@ class ContactsService extends AbstractService
                 ]
             );
 
+            if (!$contact)
+                throw new ServiceException("Contact not found", self::ERROR_CONTACT_NOT_FOUND);
+
             $result = $this->contactsFactory
                 ->setData($contact, $contactData)
                 ->update();
@@ -147,13 +150,13 @@ class ContactsService extends AbstractService
             );
 
             if (!$contact)
-                throw new ServiceException("Contact not found", self::ERROR_USER_NOT_FOUND);
+                throw new ServiceException("Contact not found", self::ERROR_CONTACT_NOT_FOUND);
 
             $contact->getPhones()->delete();
             $result = $contact->delete();
 
             if (!$result)
-                throw new ServiceException('Unable to delete contact', self::ERROR_UNABLE_DELETE_USER);
+                throw new ServiceException('Unable to delete contact', self::ERROR_UNABLE_DELETE_CONTACT);
 
             return ["deleted" => true];
 

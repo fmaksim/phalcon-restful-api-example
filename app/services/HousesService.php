@@ -57,9 +57,9 @@ class HousesService extends AbstractService
         try {
             $houses = Houses::find(
                 [
-                    'conditions' => 'streetId = :streetId:',
+                    'conditions' => 'street_id = :street_id:',
                     'bind' => [
-                        'streetId' => $streetId
+                        'street_id' => $streetId
                     ],
                 ]
             );

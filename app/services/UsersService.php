@@ -27,24 +27,8 @@ class UsersService extends AbstractService
     /** Unable to delete user */
     const ERROR_UNABLE_DELETE_USER = 1105;
 
-    /** Unable to delete user */
-    const ERROR_INVALID_SIGNATURE = 1106;
 
-    public function checkSignature()
-    {
-        $headers = $this->request->getHeaders();
-        $user = $this->findUser($headers['Login']);
-
-        if (!$user)
-            throw new ServiceException('User not found', self::ERROR_USER_NOT_FOUND);
-
-        $secret = $this->generateSecret($user);
-        $signature = $this->generateSignature($secret);
-        if ($signature != $headers['Signature'])
-            throw new ServiceException('Incorrect signature', self::ERROR_INVALID_SIGNATURE);
-    }
-
-    private function findUser($login)
+    public function findByLogin($login)
     {
         return Users::findFirst(
             [
@@ -56,31 +40,10 @@ class UsersService extends AbstractService
         );
     }
 
-    private function generateSecret($user)
-    {
-        return $user->getPassword();
-    }
-
-    private function generateSignature($secret)
-    {
-        $requestText = $this->fetchRequestText();
-        //echo hash_hmac('sha256', $requestText, $secret) . "  ---- ";
-        //echo base64_encode(hash_hmac('sha256', $requestText, $secret));
-        //die();
-        return base64_encode(hash_hmac('sha256', $requestText, $secret));
-    }
-
-    private function fetchRequestText()
-    {
-        $body = $this->request->getRawBody();
-        return $body ? $body : $this->request->getURI();
-    }
-
     public function login(array $userData)
     {
         try {
-            $user = $this->findUser($userData['login']);
-
+            $user = $this->findByLogin($userData['login']);
             if (!$user)
                 throw new ServiceException('User not found', self::ERROR_USER_NOT_FOUND);
 

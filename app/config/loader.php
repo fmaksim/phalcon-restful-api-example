@@ -8,6 +8,7 @@ $loader->registerNamespaces(
         'App\Models' => realpath(__DIR__ . '/../models/'),
         'App\Middleware' => realpath(__DIR__ . '/../middleware/'),
         'App\Factories' => realpath(__DIR__ . '/../factories/'),
+        'App\Helpers' => realpath(__DIR__ . '/../helpers/'),
     ]
 );
 

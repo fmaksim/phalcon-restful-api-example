@@ -46,5 +46,6 @@ $di->setShared('flatsService', '\App\Services\FlatsService');
 $di->setShared('contactsService', '\App\Services\ContactsService');
 $di->setShared('contactsFactory', '\App\Factories\ContactsFactory');
 $di->setShared('phonesFactory', '\App\Factories\PhonesFactory');
+$di->setShared('signatureHelper', '\App\Helpers\SignatureHelper');
 
 return $di;

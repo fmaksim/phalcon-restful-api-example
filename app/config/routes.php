@@ -81,7 +81,7 @@ $contactsCollection->post('', 'addContactAction');
 $contactsCollection->put('/{contactId:[1-9][0-9]*}', 'editContactAction');
 $contactsCollection->delete('/{contactId:[1-9][0-9]*}', 'deleteContactAction');
 $app->mount($contactsCollection);
-//});
+
 
 $usersCollection = new \Phalcon\Mvc\Micro\Collection();
 $usersCollection->setHandler('\App\Controllers\UsersController', true);
