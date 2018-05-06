@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Velcom REST API",
+    "title": "Phalcon Restful API",
     "description": "A sample API",
     "termsOfService": "http://swagger.io/terms/",
     "version": "1.0.0"
