@@ -67,7 +67,7 @@ class ContactsService extends AbstractService
      *
      * @param array $contactData
      */
-    public function createContact(array $contactData)
+    public function createContact(array $contactData): array
     {
         try {
             $contact = $this->contactsFactory->create($contactData);
@@ -93,7 +93,7 @@ class ContactsService extends AbstractService
      *
      * @param array $contactData
      */
-    public function updateContact(array $contactData)
+    public function updateContact(array $contactData): array
     {
         try {
             $contact = Contacts::findFirst(
@@ -132,7 +132,7 @@ class ContactsService extends AbstractService
      *
      * @param int $contactData
      */
-    public function deleteContact($contactData)
+    public function deleteContact($contactData): array
     {
         try {
             $contact = Contacts::findFirst(

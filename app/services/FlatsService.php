@@ -17,7 +17,7 @@ class FlatsService extends AbstractService
      *
      * @return array
      */
-    public function getHouseFlats($houseId)
+    public function getHouseFlats($houseId): array
     {
         try {
             $flats = Flats::find(
@@ -29,15 +29,41 @@ class FlatsService extends AbstractService
                     'columns' => "id, flatNumber, status, velcom, name, FIO",
                 ]
             );
-            if (!$flats) {
+            if (!$flats)
                 return [];
-            }
+
             $flats = $flats->toArray();
             foreach ($flats as &$flat) {
                 $flat["velcom"] = ($flat["velcom"] === "1") ? true : false;
             }
 
             return $flats;
+        } catch (\PDOException $e) {
+            throw new ServiceException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * Returns flat by id
+     *
+     * @return array
+     */
+    public function getFlatById($flatId): array
+    {
+        try {
+            $flat = Flats::findFirst(
+                [
+                    'conditions' => 'id = :id:',
+                    'bind' => [
+                        'id' => $flatId
+                    ],
+                ]
+            );
+
+            if (!$flat)
+                return [];
+
+            return $flat->toArray();
         } catch (\PDOException $e) {
             throw new ServiceException($e->getMessage(), $e->getCode(), $e);
         }

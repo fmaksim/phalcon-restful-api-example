@@ -17,7 +17,7 @@ class HousesService extends AbstractService
      *
      * @return array
      */
-    public function getHousesList()
+    public function getHousesList(): array
     {
         try {
             $houses = Houses::find(
@@ -28,9 +28,9 @@ class HousesService extends AbstractService
                 ]
             );
 
-            if (!$houses) {
+            if (!$houses)
                 return [];
-            }
+
             $houses = $houses->toArray();
             foreach ($houses as &$house) {
                 $house["velcom"] = ($house["velcom"] === "1") ? true : false;
@@ -47,7 +47,7 @@ class HousesService extends AbstractService
      *
      * @return array
      */
-    public function getHousesListByStreet($streetId)
+    public function getHousesListByStreet($streetId): array
     {
         try {
             $houses = Houses::find(
@@ -60,9 +60,8 @@ class HousesService extends AbstractService
                 ]
             );
 
-            if (!$houses) {
+            if (!$houses)
                 return [];
-            }
 
             return $houses->toArray();
         } catch (\PDOException $e) {
@@ -75,7 +74,7 @@ class HousesService extends AbstractService
      *
      * @return array
      */
-    public function getHouseById($houseId)
+    public function getHouseById($houseId): array
     {
         try {
             $house = Houses::findFirst(
@@ -88,9 +87,8 @@ class HousesService extends AbstractService
                 ]
             );
 
-            if (!$house) {
+            if (!$house)
                 return [];
-            }
 
             return $house->toArray();
         } catch (\PDOException $e) {
