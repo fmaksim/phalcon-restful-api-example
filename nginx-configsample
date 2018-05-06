@@ -1,14 +1,14 @@
 server {
     listen      80;
-    server_name phalcon-redis.dev;
-    root        /home/abelousov/Projects/phalcon-redis/public;
+    server_name phalcon-rest.local;
+    root        /home/fmaksim/Projects/phalcon-rest/public;
     index       index.php index.html index.htm;
     charset     utf-8;
 
-    error_log  /var/log/nginx/phalcon-redis.dev.error.log;
-    access_log /var/log/nginx/phalcon-redis.dev.access.log;
+    error_log  /var/log/nginx/phalcon-rest.local.error.log;
+    access_log /var/log/nginx/phalcon-rest.local.access.log;
 
-    set $root_path /home/abelousov/Projects/phalcon-redis/public;
+    set $root_path /home/fmaksim/Projects/phalcon-rest/public;
 
 
     location / {
@@ -16,7 +16,7 @@ server {
     }
 
     location ~ \.php {
-        fastcgi_pass  unix:/run/php/php7.0-fpm.sock;
+        fastcgi_pass  unix:/run/php/php7.2-fpm.sock;
         fastcgi_index /index.php;
 
         include fastcgi_params;
