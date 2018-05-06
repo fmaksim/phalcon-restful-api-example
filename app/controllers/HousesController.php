@@ -32,6 +32,7 @@ class HousesController extends AbstractController
      *      in="header",
      *      required=true,
      *      description="MAC Signature",
+     *      defaultValue="NWQzMzdlYzlmZGU2N2FkN2ExOWQzZmMwZTJmOGZlZDgwYzAwMjUyMWM1MDhiM2MwYjkzYzFmZjE2ZGI3NWRiYg==",
      *      type="string"
      *     ),
      * @SWG\Parameter(
@@ -39,6 +40,7 @@ class HousesController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *   @SWG\Response(
@@ -72,6 +74,7 @@ class HousesController extends AbstractController
      *         in="path",
      *         required=true,
      *         description="Street Id",
+     *         defaultValue="1",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -79,6 +82,7 @@ class HousesController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="MAC Signature",
+     *         defaultValue="ODNmNDg1YmFkM2I5OTBkNDU4ZmM4ZDNmZDcyYTk2ODBhNzM5OTI4ZWZmNjEyZjZlZjNkM2U4OGI0OTBjZjJjNw==",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -86,6 +90,7 @@ class HousesController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -119,6 +124,7 @@ class HousesController extends AbstractController
      *         in="path",
      *         required=true,
      *         description="House ID",
+     *         defaultValue="1",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -126,6 +132,7 @@ class HousesController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="MAC Signature",
+     *         defaultValue="YzYwZDJhOGIzYzA3NGFmOTg1ODdkNmY3NGQ3MTY5MDFhN2RiNDRkNGVkMWQ3OTBkMmQxZDhiYWI4MjMyYzgwYw==",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -133,6 +140,7 @@ class HousesController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -165,6 +173,7 @@ class HousesController extends AbstractController
      *         in="path",
      *         required=true,
      *         description="House id",
+     *         defaultValue="1",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -172,6 +181,7 @@ class HousesController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="MAC Signature",
+     *         defaultValue="YmFiY2U1MjhiNjU0MGM3YTA1MWIzNjFiYjc1Y2NlYjg1ZjA4YjQ4OWVjN2M3ZDMwZDgzYjc5Y2RmNjJhYjY4OQ==",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -179,6 +189,7 @@ class HousesController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *     @SWG\Response(

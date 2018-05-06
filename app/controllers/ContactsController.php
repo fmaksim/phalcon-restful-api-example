@@ -7,6 +7,7 @@ use App\Controllers\HttpExceptions\Http422Exception;
 use App\Controllers\HttpExceptions\Http500Exception;
 use App\Services\AbstractService;
 use App\Services\ServiceException;
+use App\Services\ContactsService;
 
 /**
  * Operations with Contacts: CRUD
@@ -35,6 +36,7 @@ class ContactsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="MAC signature",
+     *         defaultValue = "MTJmOTdjYjE1Y2M3OTlkNDhkZWE5MmM0YjU5ZjA5MjhiZjlhNjgxZGFiMGNkMTc3OGJkYzUwNWVlODk4MTNlZg==",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -42,6 +44,7 @@ class ContactsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -89,6 +92,7 @@ class ContactsController extends AbstractController
      *         in="path",
      *         required=true,
      *         description="Contact Id",
+     *         defaultValue="1",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -96,6 +100,7 @@ class ContactsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="MAC signature",
+     *         defaultValue="MTJmOTdjYjE1Y2M3OTlkNDhkZWE5MmM0YjU5ZjA5MjhiZjlhNjgxZGFiMGNkMTc3OGJkYzUwNWVlODk4MTNlZg==",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -103,6 +108,7 @@ class ContactsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -168,6 +174,7 @@ class ContactsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="MAC signature",
+     *         defaultValue="Njc2MTYyZGRiNmIyMWZjZGQzM2VhNTU4ODQ2NDU3MDhhZTJjZjRkMjRjNDY2Y2NjMWE2ZWI1N2YzZjBlNzQwNQ==",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -175,6 +182,7 @@ class ContactsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -192,8 +200,8 @@ class ContactsController extends AbstractController
             return $this->contactsService->deleteContact((int)$contactId);
         } catch (ServiceException $e) {
             switch ($e->getCode()) {
-                case ContactsService::ERROR_UNABLE_DELETE_USER:
-                case ContactsService::ERROR_USER_NOT_FOUND:
+                case ContactsService::ERROR_UNABLE_DELETE_CONTACT:
+                case ContactsService::ERROR_CONTACT_NOT_FOUND:
                     throw new Http422Exception($e->getMessage(), $e->getCode(), $e);
                 default:
                     throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);

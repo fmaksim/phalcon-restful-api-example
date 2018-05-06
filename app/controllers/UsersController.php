@@ -28,7 +28,7 @@ class UsersController extends AbstractController
      *         in="body",
      *         description="Login and password",
      *         required=true,
-     *         value = "ssss",
+     *         value = "",
      *         @SWG\Schema(ref="#/definitions/Users"),
      *     ),
      *     @SWG\Response(

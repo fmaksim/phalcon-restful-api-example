@@ -31,6 +31,7 @@ class StreetsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="MAC signature",
+     *         defaultValue = "ODU5ODM0YzNiZWFlNTAxZWViMTEyZDRlMTc1ODlkMjg1OTBkMjVjN2NkYjUzNDNmNTY5MjY0NWM4MjdkNjczYw==",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -38,6 +39,7 @@ class StreetsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *   @SWG\Response(

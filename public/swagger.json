@@ -48,14 +48,16 @@
             "in": "header",
             "description": "MAC signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "MTJmOTdjYjE1Y2M3OTlkNDhkZWE5MmM0YjU5ZjA5MjhiZjlhNjgxZGFiMGNkMTc3OGJkYzUwNWVlODk4MTNlZg=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           }
         ],
         "responses": {
@@ -86,21 +88,24 @@
             "in": "path",
             "description": "Contact Id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "1"
           },
           {
             "name": "signature",
             "in": "header",
             "description": "MAC signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "MTJmOTdjYjE1Y2M3OTlkNDhkZWE5MmM0YjU5ZjA5MjhiZjlhNjgxZGFiMGNkMTc3OGJkYzUwNWVlODk4MTNlZg=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           },
           {
             "name": "body",
@@ -145,14 +150,16 @@
             "in": "header",
             "description": "MAC signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "Njc2MTYyZGRiNmIyMWZjZGQzM2VhNTU4ODQ2NDU3MDhhZTJjZjRkMjRjNDY2Y2NjMWE2ZWI1N2YzZjBlNzQwNQ=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           }
         ],
         "responses": {
@@ -174,21 +181,24 @@
             "in": "path",
             "description": "Flat id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "1"
           },
           {
             "name": "signature",
             "in": "header",
             "description": "MAC Signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "MWZkOTQ1ZjE4NWRkMzEyMjVkNmIxMGRlOWY0YjUyODc3YmE1MDcyYTU5ZjYzNzRjODU4NWI2MTQ1YTIzZjExYg=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           }
         ],
         "responses": {
@@ -213,21 +223,24 @@
             "in": "path",
             "description": "Flat ID",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "1"
           },
           {
             "name": "signature",
             "in": "header",
             "description": "MAC Signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "OGFjMTY2NGJmNDI3MzZjZDFhMWY5N2E0NTQ4NWFiMzMyZDcyZGJiMmNhOWNlY2EwZDE4NDY2MGYxYjg4ZjIzZA=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           }
         ],
         "responses": {
@@ -252,14 +265,16 @@
             "in": "header",
             "description": "MAC Signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "NWQzMzdlYzlmZGU2N2FkN2ExOWQzZmMwZTJmOGZlZDgwYzAwMjUyMWM1MDhiM2MwYjkzYzFmZjE2ZGI3NWRiYg=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           }
         ],
         "responses": {
@@ -284,21 +299,24 @@
             "in": "path",
             "description": "Street Id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "1"
           },
           {
             "name": "signature",
             "in": "header",
             "description": "MAC Signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "ODNmNDg1YmFkM2I5OTBkNDU4ZmM4ZDNmZDcyYTk2ODBhNzM5OTI4ZWZmNjEyZjZlZjNkM2U4OGI0OTBjZjJjNw=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           }
         ],
         "responses": {
@@ -323,21 +341,24 @@
             "in": "path",
             "description": "House ID",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "1"
           },
           {
             "name": "signature",
             "in": "header",
             "description": "MAC Signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "YzYwZDJhOGIzYzA3NGFmOTg1ODdkNmY3NGQ3MTY5MDFhN2RiNDRkNGVkMWQ3OTBkMmQxZDhiYWI4MjMyYzgwYw=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           }
         ],
         "responses": {
@@ -362,21 +383,24 @@
             "in": "path",
             "description": "House id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "1"
           },
           {
             "name": "signature",
             "in": "header",
             "description": "MAC Signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "YmFiY2U1MjhiNjU0MGM3YTA1MWIzNjFiYjc1Y2NlYjg1ZjA4YjQ4OWVjN2M3ZDMwZDgzYjc5Y2RmNjJhYjY4OQ=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           }
         ],
         "responses": {
@@ -401,14 +425,16 @@
             "in": "header",
             "description": "MAC signature",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "ODU5ODM0YzNiZWFlNTAxZWViMTEyZDRlMTc1ODlkMjg1OTBkMjVjN2NkYjUzNDNmNTY5MjY0NWM4MjdkNjczYw=="
           },
           {
             "name": "login",
             "in": "header",
             "description": "Login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "defaultValue": "admin"
           }
         ],
         "responses": {

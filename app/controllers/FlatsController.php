@@ -26,6 +26,7 @@ class FlatsController extends AbstractController
      *         in="path",
      *         required=true,
      *         description="Flat id",
+     *         defaultValue="1",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -33,6 +34,7 @@ class FlatsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="MAC Signature",
+     *         defaultValue="MWZkOTQ1ZjE4NWRkMzEyMjVkNmIxMGRlOWY0YjUyODc3YmE1MDcyYTU5ZjYzNzRjODU4NWI2MTQ1YTIzZjExYg==",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -40,6 +42,7 @@ class FlatsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *     @SWG\Response(
@@ -78,6 +81,7 @@ class FlatsController extends AbstractController
      *         in="path",
      *         required=true,
      *         description="Flat ID",
+     *         defaultValue="1",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -85,6 +89,7 @@ class FlatsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="MAC Signature",
+     *         defaultValue="OGFjMTY2NGJmNDI3MzZjZDFhMWY5N2E0NTQ4NWFiMzMyZDcyZGJiMmNhOWNlY2EwZDE4NDY2MGYxYjg4ZjIzZA==",
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -92,6 +97,7 @@ class FlatsController extends AbstractController
      *         in="header",
      *         required=true,
      *         description="Login",
+     *         defaultValue="admin",
      *         type="string"
      *     ),
      *     @SWG\Response(
