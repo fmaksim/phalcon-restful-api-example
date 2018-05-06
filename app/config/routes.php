@@ -4,7 +4,7 @@ use Phalcon\Events\Manager;
 use App\Middleware\SignatureMiddleware;
 /**
  * @SWG\Info(
- *   title="Velcom REST API",
+ *   title="Phalcon Restful API",
  *   description="A sample API",
  *   version="1.0.0",
  *   termsOfService="http://swagger.io/terms/"
