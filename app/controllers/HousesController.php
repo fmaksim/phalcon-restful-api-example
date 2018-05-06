@@ -195,7 +195,6 @@ class HousesController extends AbstractController
     {
         try {
             $houseList = $this->flatsService->getHouseFlats($houseId);
-
         } catch (ServiceException $e) {
             throw new Http500Exception(_('Internal Server Error'), $e->getCode(), $e);
         }

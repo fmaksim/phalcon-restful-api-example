@@ -20,20 +20,25 @@ class HousesService extends AbstractService
     public function getHousesList(): array
     {
         try {
-            $houses = Houses::find(
-                [
-                    'conditions' => '',
-                    'bind' => [],
-                    'columns' => "id, street, streetType, streetId, house, housing, flatsCount, velcom, other, percent",
-                ]
-            );
+            $houses = Houses::find();
 
             if (!$houses)
                 return [];
 
+            $streets = [];
+            $flatsCounters = [];
+
+            foreach ($houses as $house) {
+                $streets[$house->getId()] = $house->streets->toArray();
+                $flatsCounters[$house->getId()] = $house->countFlats();
+            }
+
             $houses = $houses->toArray();
             foreach ($houses as &$house) {
-                $house["velcom"] = ($house["velcom"] === "1") ? true : false;
+                $house["address"] = Houses::getAddress($house, $streets[$house["id"]]);
+                $house["flats_count"] = $flatsCounters[$house["id"]];
+
+                unset($house["street_id"]);
             }
 
             return $houses;
@@ -56,7 +61,6 @@ class HousesService extends AbstractService
                     'bind' => [
                         'streetId' => $streetId
                     ],
-                    'columns' => "id, house, housing",
                 ]
             );
 
@@ -83,14 +87,20 @@ class HousesService extends AbstractService
                     'bind' => [
                         'id' => $houseId
                     ],
-                    'columns' => "id, leader, employer, startWorkingTime, endWorkingTime",
                 ]
             );
 
             if (!$house)
                 return [];
 
-            return $house->toArray();
+            $street = $house->streets->toArray();
+            $flatsCount = $house->countFlats();
+
+            $house = $house->toArray();
+            $house["address"] = Houses::getAddress($house, $street);
+            $house["flats_count"] = $flatsCount;
+
+            return $house;
         } catch (\PDOException $e) {
             throw new ServiceException($e->getMessage(), $e->getCode(), $e);
         }
