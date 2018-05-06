@@ -8,12 +8,15 @@ use App\Models\Contacts;
 class ContactsFactory
 {
 
-    public function create($data): Contacts
+    /**
+     * @param $data
+     * @return int inserted id
+     */
+    public function create(array $data): int
     {
         $contact = new Contacts();
-        $contact = $this->setData($contact, $data)->create();
-
-        return $contact;
+        $result = $this->setData($contact, $data)->create();
+        return $result === true ? $contact->getWriteConnection()->lastInsertId() : -1;
     }
 
     public function setData(Contacts $contact, $data): Contacts

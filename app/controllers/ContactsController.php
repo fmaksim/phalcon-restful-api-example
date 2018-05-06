@@ -27,7 +27,7 @@ class ContactsController extends AbstractController
      *         in="body",
      *         description="Contact data",
      *         required=true,
-     *         value = "jjj",
+     *         value = "",
      *         @SWG\Schema(ref="#/definitions/Contacts"),
      *     ),
      *     @SWG\Parameter(
