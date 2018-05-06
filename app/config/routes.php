@@ -10,7 +10,7 @@ use App\Middleware\SignatureMiddleware;
  *   termsOfService="http://swagger.io/terms/"
  * )
  * @SWG\Swagger(
- *   host="88.99.161.235",
+ *   host="velcom-rest.local",
  *   basePath="/",
  *   schemes={"http"},
  *   produces={"application/json"},

@@ -27,7 +27,7 @@ class ContactsController extends AbstractController
      *         in="body",
      *         description="Contact data",
      *         required=true,
-     *         value = "",
+     *         value = "jjj",
      *         @SWG\Schema(ref="#/definitions/Contacts"),
      *     ),
      *     @SWG\Parameter(
@@ -89,7 +89,6 @@ class ContactsController extends AbstractController
      *         in="path",
      *         required=true,
      *         description="Contact Id",
-     *         defaultValue="d34fa50e61b93c4139dad598242ddd42ecbd2fcef3151fe40446e8f5962a03e5admin5"
      *         type="string"
      *     ),
      *     @SWG\Parameter(
@@ -112,7 +111,7 @@ class ContactsController extends AbstractController
      *         description="Contact data",
      *         required=true,
      *         value = "",
-     *         @SWG\Schema(ref="#/definitions/Contact"),
+     *         @SWG\Schema(ref="#/definitions/Contacts"),
      *     ),
      *     @SWG\Response(
      *         response=400,

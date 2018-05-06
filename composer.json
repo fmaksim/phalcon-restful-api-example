@@ -6,5 +6,8 @@
   },
   "require-dev": {
     "phalcon/devtools": "3.*.*@dev"
+  },
+  "scripts": {
+    "swagger": "cd public/ && php swagger.php > swagger.json"
   }
 }
