@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Contacts;
 use App\Models\Flats;
+use App\Models\Phones;
 
 /**
  * Business-logic for flats
@@ -20,21 +22,32 @@ class FlatsService extends AbstractService
     public function getHouseFlats($houseId): array
     {
         try {
+
             $flats = Flats::find(
                 [
-                    'conditions' => 'houseId = :houseId:',
+                    'conditions' => 'house_id = :house_id:',
                     'bind' => [
-                        'houseId' => $houseId
+                        'house_id' => $houseId
                     ],
-                    'columns' => "id, flatNumber, status, velcom, name, FIO",
                 ]
             );
             if (!$flats)
                 return [];
 
+            $contacts = [];
+            foreach ($flats as $flat) {
+                $contacts[$flat->getId()] = $flat->contacts;
+            }
+
             $flats = $flats->toArray();
             foreach ($flats as &$flat) {
-                $flat["velcom"] = ($flat["velcom"] === "1") ? true : false;
+                $flat["contacts"] = $contacts[$flat["id"]]->toArray();
+                if ($flat["contacts"]) {
+                    foreach ($flat["contacts"] as &$contact) {
+                        $contact["phones"] = Phones::findByContactId($contact["id"])->toArray();
+                    }
+                }
+                unset($flat["house_id"]);
             }
 
             return $flats;
@@ -63,7 +76,18 @@ class FlatsService extends AbstractService
             if (!$flat)
                 return [];
 
-            return $flat->toArray();
+            $houseInfo = $flat->houses->toArray();
+            $contacts = $flat->contacts->toArray();
+            $flat = $flat->toArray();
+
+            $flat["contacts"] = $contacts;
+            $flat["house"] = $houseInfo;
+            if ($flat["contacts"]) {
+                foreach ($flat["contacts"] as &$contact) {
+                    $contact["phones"] = Phones::findByContactId($contact["id"])->toArray();
+                }
+            }
+            return $flat;
         } catch (\PDOException $e) {
             throw new ServiceException($e->getMessage(), $e->getCode(), $e);
         }

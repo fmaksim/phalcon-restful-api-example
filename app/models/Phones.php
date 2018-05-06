@@ -173,4 +173,17 @@ class Phones extends \Phalcon\Mvc\Model
         return 'phones';
     }
 
+    public static function findByContactId(int $contactId)
+    {
+        $parameters = [
+            [
+                'conditions' => 'contact_id = :contact_id:',
+                'bind' => [
+                    'contact_id' => $contactId
+                ],
+            ]
+        ];
+        return self::find($parameters);
+    }
+
 }

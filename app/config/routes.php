@@ -52,10 +52,6 @@ $eventsManager = new Manager();
 $eventsManager->attach('micro', new SignatureMiddleware());
 $app->before(new SignatureMiddleware());
 
-//$app->before(function () use($app) {
-//$signatureMiddleware = new SignatureMiddleware();
-//$signatureMiddleware->call($app);
-
 $housesCollection = new \Phalcon\Mvc\Micro\Collection();
 $housesCollection->setHandler('\App\Controllers\HousesController', true);
 $housesCollection->setPrefix('/house');

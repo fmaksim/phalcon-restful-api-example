@@ -29,7 +29,7 @@ class ContactsService extends AbstractService
     const ERROR_UNABLE_DELETE_CONTACT = 1105;
 
     /**
-     * Returns contats by flat id
+     * Returns contacts by flat id
      *
      * @return array
      */

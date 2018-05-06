@@ -133,6 +133,13 @@ class Contacts extends \Phalcon\Mvc\Model
             array('alias' => 'Phones', "reusable" => true)
         );
 
+        $this->belongsTo(
+            "flat_id",
+            "App\Models\Flats",
+            "id",
+            array('alias' => 'Flats')
+        );
+
     }
 
     /**
